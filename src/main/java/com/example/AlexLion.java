@@ -8,7 +8,7 @@ public class AlexLion extends Lion {
         super("Самец", feline);
     }
     public List<String> getFriends(){
-       return List.of("Marty zebra ", "Melman giraffe", "Gloria hippo");
+       return List.of("Marty zebra", "Melman giraffe", "Gloria hippo");
     }
 
     public String getPlaceOfLiving(){

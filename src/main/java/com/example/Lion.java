@@ -15,7 +15,7 @@ public class Lion {
         } else {
             throw new Exception("Используйте допустимые значения пола животного - самец или самка");
         }
-        this.feline = feline; // Присваиваем переданный объект
+        this.feline = feline;
     }
 
     public int getKittens() {

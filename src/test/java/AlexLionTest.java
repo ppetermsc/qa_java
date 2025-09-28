@@ -17,15 +17,25 @@ public class AlexLionTest {
     @Before
     public void setUp() throws Exception {
         felineMock = Mockito.mock(Feline.class);
-        alexLion = new AlexLion("Самец", felineMock); // Изменено на "Самец"
+        alexLion = new AlexLion("Самец", felineMock);
     }
 
     @Test
-    public void getFriendsTest(){
+    public void getFriendsNotNullTest() {
         List<String> friends = alexLion.getFriends();
         assertNotNull(friends);
+    }
+
+    @Test
+    public void getFriendsSizeTest() {
+        List<String> friends = alexLion.getFriends();
         assertEquals(3, friends.size());
-        assertEquals("Marty zebra ", friends.get(0)); // Обратите внимание на пробел в конце
+    }
+
+    @Test
+    public void getFriendsContentTest() {
+        List<String> friends = alexLion.getFriends();
+        assertEquals("Marty zebra", friends.get(0));
         assertEquals("Melman giraffe", friends.get(1));
         assertEquals("Gloria hippo", friends.get(2));
     }

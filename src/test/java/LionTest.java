@@ -8,40 +8,32 @@ import org.mockito.Mockito;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
 public class LionTest {
-    private Lion lion;
+
     private Feline felineMock;
 
     @Before
     public void setUp() throws Exception {
         felineMock = Mockito.mock(Feline.class);
-        lion = new Lion("Самец", felineMock);
-    }
-
-    @Test
-    public void lionHasManeTest() {
-        Assert.assertTrue("У самца есть грива", lion.hasMane());
-    }
-
-    @Test
-    public void lionessHasNoManeTest() throws Exception {
-        lion = new Lion("Самка", felineMock);
-        Assert.assertFalse("У самки нет гривы", lion.hasMane());
     }
 
     @Test
     public void getKittensTest() throws Exception {
-        Mockito.when(felineMock.getKittens()).thenReturn(3);
+        Lion lion = new Lion("Самка", felineMock);
+        Mockito.when(felineMock.getKittens()).thenReturn(1);
         int kittens = lion.getKittens();
-        Assert.assertEquals("Количество котят должно быть 3", 3, kittens);
+        assertEquals("Количество котят должно быть 1", 1, kittens);
     }
 
     @Test
     public void getFoodTest() throws Exception {
-        List<String> expectedFood = Arrays.asList("Мясо");
-        Mockito.when(felineMock.eatMeat()).thenReturn(expectedFood);
-        List<String> food = lion.getFood();
-        Assert.assertEquals("Лев ест мясо", expectedFood, food);
+        List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
+        when(felineMock.eatMeat()).thenReturn(expectedFood);
+        Lion lion = new Lion("Самец", felineMock);
+        assertEquals(expectedFood, lion.getFood());
     }
 
     @Test(expected = Exception.class)

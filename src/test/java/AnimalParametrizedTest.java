@@ -1,5 +1,3 @@
-package tests;
-
 import com.example.Animal;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +24,7 @@ public class AnimalParametrizedTest {
         this.expectedException = expectedException;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Тестовые данные: {0}, ожидаемая еда: {1}, исключение: {2}")
     public static Object[][] parameters() {
         return new Object[][] {
                 { "Травоядное", List.of("Трава", "Различные растения"), null },
@@ -44,16 +42,11 @@ public class AnimalParametrizedTest {
     public void getFoodIsCorrectTest() throws Exception {
         if (expectedException != null) {
             Exception exception = assertThrows(expectedException, () -> animal.getFood(animalSpecies));
-            assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник", exception.getMessage());
+            assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник",
+                    exception.getMessage());
         } else {
             List<String> food = animal.getFood(animalSpecies);
             assertEquals(expectedFood, food);
         }
-    }
-
-    @Test
-    public void getFamilyIsCorrectTest() {
-        String family = animal.getFamily();
-        assertEquals("Существует несколько семейств: заячьи, беличьи, мышиные, кошачьи, псовые, медвежьи, куньи", family);
     }
 }

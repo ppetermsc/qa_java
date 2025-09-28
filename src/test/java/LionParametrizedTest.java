@@ -1,5 +1,6 @@
 import com.example.Feline;
 import com.example.Lion;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,23 +37,30 @@ public class LionParametrizedTest {
     public void setUp() throws Exception {
         felineMock = mock(Feline.class);
         lion = new Lion(sex, felineMock);
+        when(felineMock.getKittens()).thenReturn(1);
     }
 
     @Test
-    public void doesHaveManeTest() {
-        assertEquals(expectedHasMane, lion.hasMane());
+    public void lionHasManeTest() throws Exception {
+        lion = new Lion("Самец", felineMock);
+        Assert.assertTrue("У самца есть грива", lion.hasMane());    }
+
+    @Test
+    public void lionessHasNoManeTest() throws Exception {
+        lion = new Lion("Самка", felineMock);
+        Assert.assertFalse("У самки нет гривы", lion.hasMane());
     }
 
     @Test
     public void getKittensTest() throws Exception {
-        when(felineMock.getKittens()).thenReturn(3);
-        assertEquals(3, lion.getKittens());
+        assertEquals(1, lion.getKittens());
     }
 
     @Test
     public void getFoodTest() throws Exception {
-        List<String> expectedFood = Arrays.asList("Мясо");
-        when(felineMock.eatMeat()).thenReturn(expectedFood);
-        assertEquals(expectedFood, lion.getFood());
+    List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
+    when(felineMock.eatMeat()).thenReturn(expectedFood);
+    Lion lion = new Lion("Самец", felineMock);
+    assertEquals(expectedFood, lion.getFood());
     }
 }
