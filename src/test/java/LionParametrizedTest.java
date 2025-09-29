@@ -37,30 +37,10 @@ public class LionParametrizedTest {
     public void setUp() throws Exception {
         felineMock = mock(Feline.class);
         lion = new Lion(sex, felineMock);
-        when(felineMock.getKittens()).thenReturn(1);
     }
 
     @Test
-    public void lionHasManeTest() throws Exception {
-        lion = new Lion("Самец", felineMock);
-        Assert.assertTrue("У самца есть грива", lion.hasMane());    }
-
-    @Test
-    public void lionessHasNoManeTest() throws Exception {
-        lion = new Lion("Самка", felineMock);
-        Assert.assertFalse("У самки нет гривы", lion.hasMane());
-    }
-
-    @Test
-    public void getKittensTest() throws Exception {
-        assertEquals(1, lion.getKittens());
-    }
-
-    @Test
-    public void getFoodTest() throws Exception {
-    List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
-    when(felineMock.eatMeat()).thenReturn(expectedFood);
-    Lion lion = new Lion("Самец", felineMock);
-    assertEquals(expectedFood, lion.getFood());
+    public void lionHasManeTest() {
+        Assert.assertEquals("Грива есть только у самца льва", expectedHasMane, lion.hasMane());
     }
 }

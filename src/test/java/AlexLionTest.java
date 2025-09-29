@@ -34,10 +34,9 @@ public class AlexLionTest {
 
     @Test
     public void getFriendsContentTest() {
+        List<String> expectedFriends = List.of("Marty zebra", "Melman giraffe", "Gloria hippo");
         List<String> friends = alexLion.getFriends();
-        assertEquals("Marty zebra", friends.get(0));
-        assertEquals("Melman giraffe", friends.get(1));
-        assertEquals("Gloria hippo", friends.get(2));
+        assertEquals(expectedFriends, friends);
     }
 
     @Test
